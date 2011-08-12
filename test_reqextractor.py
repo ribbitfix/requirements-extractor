@@ -36,6 +36,7 @@ meta-spec:
 """ 
         self.expected_json_dict = {
             'success' : True,
+            'errors' : [],
             'data' : { 'name' : 'ShiftJIS-CP932-MapUTF',
                        'version' : 1.03,
                        'configure_requires' :
@@ -59,9 +60,11 @@ meta-spec:
         jsonresponse = reqextractor.extract_requirements(self.fake_yaml_file)
         self.assertEqual(type(''), type(jsonresponse))
         dictresponse = json.loads(jsonresponse)
-        self.assertEqual(2, len(dictresponse.keys()))
+        self.assertEqual(3, len(dictresponse.keys()))
         self.assertEqual(type({}), type(dictresponse['data']))
         self.assertEqual(5, len(dictresponse['data'].keys()))
+        self.assertEqual(type([]), type(dictresponse['errors']))
+        self.assertEqual(0, len(dictresponse['errors']))
         self.assertEqual(self.expected_json_dict, dictresponse)
         for key in dictresponse['data']:
             for key in self.expected_json_dict['data']:
@@ -73,9 +76,11 @@ meta-spec:
         self.assertEqual(type(''), type(jsonresponse))
         dictresponse = json.loads(jsonresponse)
         self.assertTrue(dictresponse['success'])
-        self.assertEqual(2, len(dictresponse.keys()))
+        self.assertEqual(3, len(dictresponse.keys()))
         self.assertEqual(type({}), type(dictresponse['data']))
         self.assertEqual(5, len(dictresponse['data'].keys()))
+        self.assertEqual(type([]), type(dictresponse['errors']))
+        self.assertEqual(0, len(dictresponse['errors']))
         self.assertEqual(self.expected_json_dict, dictresponse)
         for key in dictresponse['data']:
             for key in self.expected_json_dict['data']:
@@ -85,10 +90,12 @@ meta-spec:
         jsonresponse = reqextractor.extract_requirements(self.non_yaml_string)
         self.assertEqual(type(''), type(jsonresponse))
         dictresponse = json.loads(jsonresponse)
-        self.assertTrue(dictresponse['success'])
-        self.assertEqual(2, len(dictresponse.keys()))
+        self.assertFalse(dictresponse['success'])
+        self.assertEqual(3, len(dictresponse.keys()))
         self.assertEqual(type({}), type(dictresponse['data']))
-        self.assertEqual(5, len(dictresponse['data'].keys()))
-
+        self.assertNotEqual(5, len(dictresponse['data'].keys()))
+        self.assertEqual(type([]), type(dictresponse['errors']))
+        self.assertNotEqual(0, len(dictresponse['errors']))
+        
 if __name__=='__main__':
     unittest.main()
