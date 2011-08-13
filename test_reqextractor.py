@@ -97,7 +97,7 @@ meta-spec:
         self.assertEqual(type([]), type(dictresponse['errors']))
         self.assertNotEqual(0, len(dictresponse['errors']))
 
-    def test_dict_return_type(self):
+    def test_return_type(self):
         dictresponse = reqextractor.extract_requirements(self.fake_yaml_file, 'dict')
         self.assertEqual(type({}), type(dictresponse))
         jsonresponse = reqextractor.extract_requirements(self.fake_yaml_string, 'json')
