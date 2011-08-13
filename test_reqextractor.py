@@ -56,7 +56,7 @@ meta-spec:
         self.fake_yaml_file = StringIO(self.fake_yaml_string)
         self.non_yaml_string = 'not actually yaml'
 
-    def _test_extract_from_stringio(self):
+    def test_extract_from_stringio(self):
         jsonresponse = reqextractor.extract_requirements(self.fake_yaml_file)
         self.assertEqual(type(''), type(jsonresponse))
         dictresponse = json.loads(jsonresponse)
@@ -71,7 +71,7 @@ meta-spec:
                 self.assertEqual(dictresponse['data'][key], self.expected_json_dict['data'][key])
 
 
-    def _test_extract_from_string(self):
+    def test_extract_from_string(self):
         jsonresponse = reqextractor.extract_requirements(self.fake_yaml_string)
         self.assertEqual(type(''), type(jsonresponse))
         dictresponse = json.loads(jsonresponse)

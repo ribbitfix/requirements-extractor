@@ -12,22 +12,17 @@ def extract_requirements(yaml_file):
         doc = yaml.load(yaml_file)
 
     req = dict(data = dict(), success = True, errors = [])
+    useful_data = ['name', 'version', 'configure_requires', 'build_requires', 'requires']
     
     for key in doc:
-        if 'requires' in key or key == 'version' or key == 'name':
+        if key in useful_data:
             req['data'][key] = doc[key]
+
     if len(req['data'].keys()) != 5:
         req['success'] = False
-        if 'name' not in req['data']:
-            req['errors'].append('name not found')
-        if 'version' not in req['data']:
-            req['errors'].append('version not found')
-        if 'requires' not in req['data']:
-            req['errors'].append('requires not found')
-        if 'configure_requires' not in req['data']:
-            req['errors'].append('configure_requires not found')
-        if 'build_requires' not in req['data']:
-            req['errors'].append('build_requires not found')
+        for item in useful_data:
+            if item not in req['data']:
+                req['errors'].append(item + ' not found')
     
     return json.dumps(req)
     
