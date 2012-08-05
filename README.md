@@ -55,7 +55,7 @@ Error handling:
 try:
     json.loads('blah blah')
 except ValueError:
-    print "wasn't json!"
+    print("Wasn't json!")
 try:
     open('blah blah')
 except IOError:
