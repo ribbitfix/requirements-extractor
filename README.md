@@ -50,7 +50,7 @@ Researched tar format
 ### 8/10
 JEFF SEZ:
 
-Error handling:
+"Error handling:
 ```python
 try:
     json.loads('blah blah')
@@ -66,7 +66,7 @@ Except do something useful instead of printing an error message.
 Also: write a test involving a fake yaml file that doesn't include requirements - make sure the reqextractor can handle this situation.
 
 Also: rewrite the function to output the "expected_json_dict" in the test. BUT FIRST, write the test to check for the things that aren't there yet: name and version.
-Check whether the value of 'data' is of type dict; check for the number of keys, etc.
+Check whether the value of 'data' is of type dict; check for the number of keys, etc."
 
 ### 8/11
 TO DO: learn about the following python libraries:
